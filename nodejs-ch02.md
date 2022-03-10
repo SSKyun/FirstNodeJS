@@ -60,3 +60,76 @@ console.log(z); // if블록내에 외부에서 사용시도--Error
 * 백틱(`)으로 만든 문자열
     - 문자열내에서 변수를 사용가능
     - `${변수명 또는 간단한JS코드}`
+
+### 2.1.3 객체 리터럴
+* 리터럴(Literal) 
+  - 구체적인 값
+    - 문자 리터럴: '',"",``
+    - 숫자 리터럴: 123,12.345
+    - 배열 리터럴: [~,~,~]
+    - 객체 리터럴: {#:&,&:#,#,&}
+* 객체 리터럴
+  - old버전
+
+```js
+  //old버전의 객체리터럴 선언
+ var sayNode = function(){ //함수선언(정의)
+    //sayNode()함수 정의
+     console.log('Node');
+ };
+ var es = 'ES객체속성추가';
+ var oldObject = { //객체 리터럴 정의
+    //키:값
+     sayJS : function(){ //sayJS() 메소드 정의 
+         console.log('JS');
+     },
+     sayNodeMethod: sayNode, //키:값
+ };
+ oldObject[es + 6] = 'Fantastic';
+ oldObject.ES7='사랑해'; //es+7 은 성립X
+ // 자바스크립트에서는 실행 중 객체에
+ // 속성을 추가할 수 있다.
+ // 속성명(키)를 동적으로 변경시켜가면서
+ // 추가하려면 변수처리
+ // 이때 사용하는 개념: 객체<==>연관배열
+ // 연관배열: 배열의 index가 문자열인 배열
+ 
+ oldObject.sayNodeMethod(); //Node
+ oldObject.sayJS(); //JS
+ console.log(oldObject.ES객체속성추가6); //Fantastic
+ console.log(oldObject.ES7);
+  ```
+  - new 버전
+```js
+  var sayNode = function(){ //함수선언(정의)
+        //sayNode()함수 정의
+        console.log('Node');
+     };
+  var es = 'ES';
+  const newObject = {
+    sayJS(){ // 키:값---> function 키워드 없이 메소드 정의
+        console.log('JS');
+    },
+    sayNode, // 키:값의 기호가 같으면 하나로 생략가능
+    [es + 6]: 'Fantastic', //키에 변수 사용해서 속성정의 가능
+    };
+    newObject.sayNode(); // node
+    newObject.sayJS(); // JS
+    console.log(newObject.ES6);// Fantastic 
+```
+
+### 2.1.4 화살표 함수
+* arrow function: (매개변수리스트)=>{소스코드들}
+* 기존 함수정의방법의 함수와 화살표 함수에서 this 사용시 주의
+  - 콜백함수를 기존 함수정의방법으로 정의하면 this는
+        global객체로 바인딩(binding, 묶는다., 연결)
+  - 콜백함수에서 화살표함수로 정의하면 this는
+    콜백함수정의하는 곳의 상위 스코프의 객체로 바인딩
+
+### 2.1.5 구조분해할당
+* let 변수명 = 객체명.변수명; ===> let (변수명) = 객체명;
+* 배열 구조분해 할당 가능
+
+### 2.1.6 클래스
+- ES6+에서 클래스 문법이 도입
+- 실제 작동은 prototype 기반으로 함

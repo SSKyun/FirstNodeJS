@@ -132,4 +132,108 @@ console.log(z); // if블록내에 외부에서 사용시도--Error
 
 ### 2.1.6 클래스
 - ES6+에서 클래스 문법이 도입
-- 실제 작동은 prototype 기반으로 함
+- 실제 작동은 prototype 기반으로 함.
+
+### 2.1.7 Promise(프로미스, 약속)
+- 실행을 완료할 것을 약속
+- 콜백함수, 비동기 동작
+- 기존에 콜백함수내에서 콜백함수를 호출하는 것을 반복한 경우
+  콜백지옥(callback hell) 발생-->해결하기위해 제안된 객체
+- ES6+ 도입된 객체
+- 비동기 처리를 성공, 실패로 분리해서 메서드 정의 가능한 특징.
+
+* 사용 규칙
+  - 1. 프로미스 객체 생성
+    - 생성자의 파라미터 : 콜백함수
+      - 콜백함수의 파라미터 : resolve(성공), reject(실패)
+    - 콜백함수를 정의하는 것에 따라 프로미스 동작이 결정
+  - 2. 생성된 객체에 then(),catch(),finally()메서드 호출
+    - 파라미터: 콜백함수
+    - resolve()호출되면 then(콜백)의 콜백 실행
+    - reject()호출되면 catch(콜백)의 콜백 실행
+    - finally(콜백): resolve()가 호출되거나 reject()가 호출되면(모든경우)
+      - 콜백의 파라미터: resolve(), reject()의 인자값을 받아내는 
+      매개변수
+
+* 여러개의 비동기 동작이 순서를 지켜서 실행되어야 하는 경우 : 콜백지옥
+  - 연속적으로 프로미스 사용 : 프로미스 체이닝
+  - 첫번째 then(콜백)의 콜백내에서 프로미스객체 생성해서 반환
+  - 두번째 then(콜백)의 콜백내에서 프로미스객체 생성해서 반환
+  - 세번째 then(콜백)의 콜백내에서 프로미스객체 생성해서 반환
+  - 네번째 then(콜백)...
+
+* 여러개의 비동기 동작이 모두 실행되어야 하는 경우:
+  - Promise.all(프로미스 객체들의 배열)
+  - 배열에 있는 모든 프로미스가 성공해야 성공한 것으로 동작
+
+### 2.1.8 async/await
+* 노드 7.6 버전이후, .ES2017이후
+* 가독성을 높임
+* 동작은 비동기 동작하는데 코딩은 동기적으로 작성할 수 있음
+* 적용하는 조건
+  - 1. 함수가 반드시 async함수여야 한다.
+    - async함수는 return하지 않아도 무조건 프로미스객체를 반환한다.
+    - async함수에 대해 then(),catch()처리 가능함
+  - 2. 비동기 코드에는 await을 함께 표기
+```js
+function findAndSaveUser(Users) {
+  Users.findOne({})
+    .then((user) => {
+      user.name = 'zero';
+      return user.save();
+    })
+    .then((user) => {
+      return Users.findOne({ gender: 'm' });
+    })
+    .then((user) => {
+      // 생략
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+```
+
+```js
+// 1. async 함수 만들기
+async function findAndSaveUser(Users) {
+//const findAndSaveUser = async function(User){
+//cibst findAndSaveUser = async (User) => {}
+}
+// 2. 비동기 코드에 await  
+
+// 3. error처리를 위해서는 try catch
+try{
+  let user = await Users.findOne({});
+  user.name = 'zero';
+  user = await user.save();
+  user = await User.findOne({gender:'m'});
+  }catch(err){
+  console.error(err);
+  }
+}
+```
+
+## 2.2 Front-end JS
+* 거의 대부분 브라우저에서 사용하는 코드
+* HTML의 script태그 내의 코드
+* html처리 객체
+  - DOM: document객체와 관련( 객체와 )
+  - BOM: window 객체와 관련(document,history,href,navigator,geolocation,...)
+
+### 2.2.1 AJAX Asynchronous Javascript and XML
+* Web 2.0의 시작, Mashup(매시업) -OpenAPI
+* 웹페이지의 이동없이 서버의 욫ㅇ에 대한 응답을 받아 처리할 수 있는 기술
+* XML--> 750N
+* XMLHttpRequest 객체사용하여 통신
+  - 관련 대체 라이브러리 많음
+  - jQuery.ajax(), axios, fetch
+  - fetch vs axios
+    - fetch: JS표준 라이브러라
+    - axios: 따로 설치해야 하는 라이브러리,, 편리성 높음
+* axios사용
+  - 설치 사용
+    - npm install axois
+  - CDN사용
+    - <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    

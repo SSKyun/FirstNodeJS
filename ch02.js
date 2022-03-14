@@ -124,7 +124,7 @@ const relationship2 ={
 };
 relationship2.logFriends(); */
 
-var candyMachine = {
+/* var candyMachine = {
     status:{ //키:값(객체로 설정 가능)
         name:'node',
         count:5,
@@ -141,7 +141,7 @@ var count = candyMachine.status.count;
 // new
 // const {getCandy, status:{count}} = candyMachine;
 
-console.log(getCandy());
+console.log(getCandy()); */
 /* 
 //배열 구조분해 할당
 var array = ['nodejs', {}, 10, true];
@@ -181,7 +181,7 @@ const {node,obj, ,bool} = array; */
   var oldZero = new Zero('human', 'Zero', 'Cho');
   Human.isHuman(oldZero); // true */
 
-  class Human {
+/*   class Human {
     constructor(type = 'human') {
       // 호출시 매개변수 생략하면 디폴트값대입
       this.type = type;
@@ -210,4 +210,18 @@ const {node,obj, ,bool} = array; */
   }
   
   const newZero = new Zero('human', 'Zero', 'Cho');
-  Human.isHuman(newZero); // true
+  Human.isHuman(newZero); // true */
+
+/* 
+  const promise3 = Promise.reject('실패');
+  const promise1 = Promise.resolve('성공1');
+  const promise2 = Promise.resolve('성공2');
+  //const promise2 = Promise.reject('성공2');
+
+  Promise.all([promise1,promise2]) // Promise.race() 참고!
+  .then((result_msg)=>{
+    console.log(result_msg);//['성공','성공2']
+  })
+  .catch((err)=>{
+    console.log(err);
+  }); */

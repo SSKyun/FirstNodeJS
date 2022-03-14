@@ -1,0 +1,52 @@
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    /* axios.get('https://www.zerocho.com/api/get')
+    // Promise로 반환
+    .then((result)=>{
+        console.log(result);
+        console.log(result.data);
+    })
+    .catch((err)=>{
+        console.log('에러',err);
+    })
+    ==> async/await으로 바꾸기*/ 
+    /* 1. async함수 정의
+       2. Promise에 await처리
+    
+       */
+    /*const test = async () => {   // 함수 정의
+           try{
+           let result = await axios.get('https://www.zerocho.com/api/get')
+           console.log(result);
+           console.log(result.data);
+       }catch(err){
+           console.error(err);
+        }
+    };
+    test();
+    함수가 한번만 사용될 경우 정의하면서 바로 호출하는 문법*/
+    (async () => {   // 함수 정의
+           try{
+           let result = await axios.get('https://www.zerocho.com/api/get')
+           console.log(result);
+           console.log(result.data);
+       }catch(err){
+           console.error(err);
+        }
+    })(); //함수정의후 바로 호출
+
+
+    (async () => {
+        try {
+          const result = await axios.post('https://www.zerocho.com/api/post/json', {
+            name: 'zerocho',
+            birth: 1994,
+          });
+          console.log(result);
+          console.log(result.data);
+        } catch (error) {
+          console.error(error);
+        }
+    })();
+</script>

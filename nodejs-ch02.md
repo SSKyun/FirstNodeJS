@@ -236,4 +236,28 @@ try{
     - npm install axois
   - CDN사용
     - <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
+    - <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+### 2.2.2 FormData
+* html의 form 태그 정보를 다루기 쉽게 해주는 객체
+  - 동적으로 form 태그의 정보를 제어할 수 있음.
+  - has(),append(),get(),getAll(),set(),delete()
+
+### 2.2.3 encodeURIComponent, decodeURIComponent
+* 웹브라우저의 주소에 대한 한글처리
+  - https://www.zerocho.com/api/search/노드
+  - https://www.zerocho.com/api/search/%EB%85%B8%EB%93%9C
+  - 보내는쪽: 한글 주소 부분을 encodeURIComponent(한글문자열) 처리
+  - 받는쪽: 한글 주소 부분을 decodeURIComponent(받은문자열) 처리
+  - encodeURIComponent('노드') : %EB%85%B8%EB%93%9C
+  - decodeURIComponent('%EB%85%B8%EB%93%9C') : 노드
+
+### 2.2.4 데이터 속성과 dataset
+* html태그에 사용자 정의 데이터를 포함시키기 위해 사용
+  - 태그에 사용자 정의 데이터 포함시키기
+  - html 태그내에 data-사용자정의데이터변깂
+    - data-변수부분1-변수부분2 --> snake-case
+  - html의 JS에서 상기 데이터 처리를 위해 dataset으로접근 사용가능
+    - 변수부분1변수부분2(변수부분2의 첫글자 대문자): CamelCase
+
+ =     

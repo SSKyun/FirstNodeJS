@@ -126,5 +126,38 @@
     1: 비정상종료 - process.exit(1)
     0 또는 인수 없음: 정상종료, process.exit(0),
     process.exit()
-  
 
+## 3.5 노드의 내장 모듈
+* 노드 설치시 함께 설치된 모듈, require()해야 함
+
+## 3.5.1 os 모듈
+* require('os')
+
+## 3.5.2 path 모듈(중요*)
+* 경로 정보를 다루기 위해 사용하는 모듈
+* os별로 경로구분자 틀림
+  - windows : \
+  - POSIX(mac, linux, unix) : /
+* 파일명, 확장자 처리에 도움
+* 노드에서 최초 상대경로의 시작점 : require.main 정보 
+
+## 3.5.3 url 모듈
+* url 정보를 다루는 모듈
+* 2가지 버전 (교과서 p119 그림 3-7)
+  - old style : node 6버전
+    - querystring 모듈 사용
+  - new style(WHATWG 방식) 웹표준을 정하는 web hypertext application     technology working group : node 7버전이후
+    - searchParams로 search정보를 객체로 관리
+
+### 3.5.4 crypto 모듈
+* 암호화 처리 모듈
+* 암호화의 종류: 2가지
+  - 1. 단방향 암호화: 암호화는 가능, 복호화 불가능
+    해시함수를 사용
+    해시함수: 문자열을 고정된 길이의 다른 문자열로 수정하는 함수
+    평문--->암호문 가능 : 암호화 (encoding) 
+    암호문--->평문 불가능 : 복호화(decoding)
+    패스워드 ---> 암호화된패스워드 O
+    암호화된패스워드 ---> 패스워드 X
+  - 2. 양방향 암호화: 암호화와 복호화가 가능한 방식
+    -  인증서, https

@@ -149,7 +149,10 @@
   - new style(WHATWG 방식) 웹표준을 정하는 web hypertext application     technology working group : node 7버전이후
     - searchParams로 search정보를 객체로 관리
 
-### 3.5.4 crypto 모듈
+### 3.5.4 querystring
+* 기존 url 객체에서 query부분을 다루기 위해서
+
+### 3.5.5 crypto 모듈
 * 암호화 처리 모듈
 * 암호화의 종류: 2가지
   - 1. 단방향 암호화: 암호화는 가능, 복호화 불가능
@@ -159,5 +162,12 @@
     암호문--->평문 불가능 : 복호화(decoding)
     패스워드 ---> 암호화된패스워드 O
     암호화된패스워드 ---> 패스워드 X
+    주로 사용되는 메소드: pbkdf2, scrypt, bcrypt (교과서p424참고)
+    평문+salt+반복횟수를 추가하여 암호화 정도를 높임
+    응용예 : 로그인 처리
   - 2. 양방향 암호화: 암호화와 복호화가 가능한 방식
-    -  인증서, https
+    - 인증서, https
+    
+### 3.5.6 util
+* utility - 도구
+* 

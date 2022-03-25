@@ -206,7 +206,7 @@ console.log(myURL.searchParams.getAll('filter'));
 console.log('searchParams.toString():', myURL.searchParams.toString());
 myURL.search = myURL.searchParams.toString(); */
 
-const url = require('url');
+/* const url = require('url');
 const querystring = require('querystring');
 
 const parsedUrl = url.parse('http://www.gilbut.co.kr/?page=3&limit=10&category=nodejs&category=javascript');
@@ -217,3 +217,77 @@ const query = querystring.parse(parsedUrl.query);
 console.log('querystring.parse():', query);
 console.log('querystring.stringify():', querystring.stringify(query));
 // stringify() : format()과 유사, 문자열로 반환
+ */
+/* const crypto = require('crypto');
+// 메소드 체이닝
+console.log('base64:', crypto.createHash('sha512').update('비밀번호').digest('base64'));
+// 해시 체이닝
+// md5 : 128bits : 취약점 발견
+//sha1 - 160bits : 취약점 발견
+//sha256 - 256bits - 32bytes : 위험
+//sha512 - 512bits - 64bytes : 사용중,경고
+
+// update(암호화하려는평문)
+// digest(인코딩코드) :base64 encoding 많이사용 : 제일 짧아서
+// 인코딩코드 : base64, hex, latin1 등
+console.log('hex:', crypto.createHash('sha512').update('비밀번호').digest('hex'));
+console.log('base64:', crypto.createHash('sha512').update('다른 비밀번호').digest('base64'));
+ */
+
+/* const crypto = require('crypto');
+
+crypto.randomBytes(
+  64, // 바이트 길이  : 512bytes
+  (err, buf) => { // buf에 생성된 데이터 입력, buffer
+  const salt = buf.toString('base64');
+  console.log('salt:', salt);
+  crypto.pbkdf2(
+  '비밀번호', // 암호화할 평문
+   salt, // 소금: 음식의 소금철엄 평문에 추가
+   100000, // 반복횟수
+   64, // key길이
+   'sha512', // 암호 해시함수알고리즘
+   (err, key) => { // key-암호문
+    console.log('password:', key.toString('base64'));
+  });
+}); */
+
+/* const crypto = require('crypto');
+
+const algorithm = 'aes-256-cbc';
+const key = 'abcdefghijklmnopqrstuvwxyz123456'; // 32 byte 고정
+const iv = '1234567890123456'; // 16 byte 고정
+
+const cipher = crypto.createCipheriv(algorithm, key, iv);
+let result = cipher.update('암호화할 문장', 'utf8', 'base64');
+result += cipher.final('base64');
+console.log('암호화:', result);
+
+const decipher = crypto.createDecipheriv(algorithm, key, iv);
+let result2 = decipher.update(result, 'base64', 'utf8');
+result2 += decipher.final('utf8');
+console.log('복호화:', result2); */
+
+const util = require('util');
+const crypto = require('crypto');
+
+const dontUseMe = util.deprecate(
+  (x, y) => { //deprecated시킬 함수
+  console.log(x + y);
+  }, 
+  'dontUseMe 함수는 deprecated되었으니 더 이상 사용하지 마세요!' 
+  // deprecated되는 함수의 호출시 출력될 내용
+);
+/* const dontUseMe(x, y) => { // 원래 deprecated 되기전
+  console.log(x + y);
+},  */
+dontUseMe(1, 2);
+// ~ify : ~만든다
+const randomBytesPromise = util.promisify(crypto.randomBytes);
+randomBytesPromise(64)
+  .then((buf) => {
+    console.log(buf.toString('base64'));
+  })
+  .catch((error) => {
+    console.error(error);
+  });

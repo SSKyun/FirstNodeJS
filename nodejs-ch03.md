@@ -170,4 +170,44 @@
     
 ### 3.5.6 util
 * utility - 도구
-* 
+
+### 3.5.7 worker_threads
+* thread 란? 프로세스에서 작업하는 작업의 단위
+* 노드에서 멀티 쓰레드 방식으로 작업하게 코딩
+* isMainThread
+* on(), once()
+* new Worker()
+* postMessage()
+* parentPort객체
+* close()
+* 복잡한 데이터 보내기: workerData객체 사용
+* 실질직인 예제 : 소수구하기
+  - 소수 : 약수 1과 숫자 자신만 있는 수
+    - 1, 2, 3 ,4, , 5 ,7,11,13,'''
+  * 쓰레드를 생성, 쓰레드간의 통신 비용(cpu시간}이 많이 발생하여
+    잘 못 코딩하면 더 느려질 수 있어 주의 필요)
+
+### 3.5.8 child_process
+* 멀티프로세싱 코딩
+* 자바스크립트엔진 실행중 다른 프로세스(예, 파이썬의 실행)결과를 
+  사용하려고 할 때 이용하는 모듈
+* exec
+  - shell
+* spawn
+  - shell, 다른 프로세스
+
+### 3.6 FS (file system)
+* fs 모듈 사용
+  - 파일 또는 폴더의 생성, 삭제, 읽기(read), 쓰기(write)
+  - readFile, writeFile
+  - 비동기 처리: 콜백처리, promise 객체로 처리, async/await
+
+### 3.6.1 동기/비동기
+* 노드의 대부분의 내장 모듈들은 비동기 처리
+* fs 모듈
+  - 비동기 처리 : 메소드명() : readFile()
+  - 동기 처리: 메소드명+Sync() : readFileSync()
+
+  
+
+

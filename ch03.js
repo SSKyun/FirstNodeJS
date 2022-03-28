@@ -268,7 +268,7 @@ let result2 = decipher.update(result, 'base64', 'utf8');
 result2 += decipher.final('utf8');
 console.log('복호화:', result2); */
 
-const util = require('util');
+/* const util = require('util');
 const crypto = require('crypto');
 
 const dontUseMe = util.deprecate(
@@ -280,7 +280,7 @@ const dontUseMe = util.deprecate(
 );
 /* const dontUseMe(x, y) => { // 원래 deprecated 되기전
   console.log(x + y);
-},  */
+},  
 dontUseMe(1, 2);
 // ~ify : ~만든다
 const randomBytesPromise = util.promisify(crypto.randomBytes);
@@ -290,4 +290,143 @@ randomBytesPromise(64)
   })
   .catch((error) => {
     console.error(error);
-  });
+  }); */
+
+ /*  const {
+    Worker, isMainThread, parentPort,
+  } = require('worker_threads');
+  
+  if (isMainThread) { // 현재 코드가 부모쓰레드(메인쓰레드, 싱글쓰레드)일 때
+    //const worker = new Worker(__filename);
+    const worker = new Worker('./workThread2.js');
+    worker.on( //once()
+      'message', 
+      // message => console.log('from worker', message)
+      (message) => {return console.log('from worker', message);}
+      );
+    worker.on(
+      'exit',
+       () => console.log('worker exit'));
+    worker.postMessage('ping');
+    //워커쓰레드객체.postMessage(워커쓰레드로보낼메시지);
+  }/*  else { // 워커일 때
+    parentPort.on('message', (value) => {
+      console.log('from parent', value);
+      parentPort.postMessage('pong');
+      parentPort.close(); */
+/* 
+      const { Worker, isMainThread, parentPort, workerData } = require('worker_threads');
+
+const min = 2;
+let primes = [];
+
+function findPrimes(start, range) {
+  let isPrime = true;
+  const end = start + range;
+  for (let i = start; i < end; i++) {
+    for (let j = min; j < Math.sqrt(end); j++) {
+      if (i !== j && i % j === 0) {
+        isPrime = false;
+        break;
+      }
+    }
+    if (isPrime) {
+      primes.push(i);
+    }
+    isPrime = true;
+  }
+}
+
+if (isMainThread) {
+  const max = 10000000;
+  const threadCount = 8;
+  const threads = new Set();
+  const range = Math.ceil((max - min) / threadCount);
+  let start = min;
+  console.time('prime');
+  for (let i = 0; i < threadCount - 1; i++) {
+    const wStart = start;
+    threads.add(new Worker((__filename, { workerData: { start: wStart, range } }))) ;
+    start += range;
+  }
+  threads.add(new Worker(__filename, { workerData: { start, range: range + ((max - min + 1) % threadCount) } }));
+  for (let worker of threads) {
+    worker.on('error', (err) => {
+      throw err;
+    });
+    worker.on('exit', () => {
+      threads.delete(worker);
+      if (threads.size === 0) {
+        console.timeEnd('prime');
+        console.log(primes.length);
+      }
+    });
+    worker.on('message', (msg) => {
+      primes = primes.concat(msg);
+    });
+  }
+} else {
+  findPrimes(workerData.start, workerData.range);
+  parentPort.postMessage(primes);
+} */
+
+/* const exec = require('child_process').exec;
+// const{exec} = required('child_process); // 변수명 == 속성 = 구조분해할당
+
+var process = exec('dir'); 
+// dos명령어, linux 명령어 - ls, shell명령어
+
+process.stdout.on('data', function(data) {
+  // stdout: 표준출력 - 모니터
+  // stdin: 표준입력 - 키보드
+  console.log(data.toString());
+}); // 실행 결과
+
+process.stderr.on('data', function(data) {
+  console.error(data.toString());
+}); // 실행 에러 */
+/* 
+const spawn = require('child_process').spawn;
+
+var process = spawn('python', ['test.py']);
+//var process = spawn('python', ['test.py'],[shell:true]);
+
+process.stdout.on('data', function(data) {
+  console.log(data.toString());
+}); // 실행 결과
+
+process.stderr.on('data', function(data) {
+  console.error(data.toString());
+}); // 실행 에러 */
+
+const fs = require('fs');
+/*fs.readFile( // 비동기적으로 작동, 처리 성공하면 콜백함수 실행
+  './readme.txt', //읽으려는 파일명
+  (err, data)=>{ // err-에러, data-성공시 파일의 정보(버퍼타입)
+    // Buffer: 8bit로 나타내는 메모리상의 데이터, 사람이 인지할 수 없음.
+    if(err){
+      throw err;
+    }
+    console.log(data);
+    console.log(data.toString());
+  }
+  ); */
+
+/* const fs = require('fs').promises;
+.then((data) =>{
+  console.log(data);
+  console.log(data.toString);
+})
+.catch((err) =>{
+  console.log(err);
+}) */
+
+(async() =>{
+  try{
+  const data = await fs.readFile('./readme.txt');
+  console.log(data);
+  console.log(data.toString());
+  }catch(err){
+    console.error(err);
+  }
+})();

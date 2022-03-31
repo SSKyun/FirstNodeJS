@@ -399,7 +399,7 @@ process.stderr.on('data', function(data) {
   console.error(data.toString());
 }); // 실행 에러 */
 
-const fs = require('fs');
+//const fs = require('fs');
 /*fs.readFile( // 비동기적으로 작동, 처리 성공하면 콜백함수 실행
   './readme.txt', //읽으려는 파일명
   (err, data)=>{ // err-에러, data-성공시 파일의 정보(버퍼타입)
@@ -421,7 +421,7 @@ const fs = require('fs');
   console.log(err);
 }) */
 
-(async() =>{
+/* (async() =>{
   try{
   const data = await fs.readFile('./readme.txt');
   console.log(data);
@@ -429,4 +429,108 @@ const fs = require('fs');
   }catch(err){
     console.error(err);
   }
-})();
+})(); */
+
+/* const fs = require('fs');
+
+fs.watch('./target.txt', (eventType, filename) => {
+  console.log(eventType, filename);
+}); */
+
+/* const crypto = require('crypto');
+
+const pass = 'pass';
+const salt = 'salt';
+const start = Date.now();
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('1:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('2:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('3:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('4:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('5:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('6:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('7:', Date.now() - start);
+});
+
+crypto.pbkdf2(pass, salt, 1000000, 128, 'sha512', () => {
+  console.log('8:', Date.now() - start);
+}); */
+/* 
+const EventEmitter = require('events');
+
+const myEvent = new EventEmitter();
+myEvent.addListener('event1', () => { // 원하는이벤트명,콜백
+  console.log('이벤트 1');
+});
+myEvent.on('event2', () => {
+  console.log('이벤트 2');
+});
+myEvent.on('event2', () => {
+  console.log('이벤트 2 추가');
+});
+myEvent.once('event3', () => {
+  console.log('이벤트 3');
+}); // 한 번만 실행됨
+
+myEvent.emit('event1'); // 이벤트 호출
+myEvent.emit('event2'); // 이벤트 호출
+
+myEvent.emit('event3');
+myEvent.emit('event3'); // 실행 안 됨
+
+myEvent.on('event4', () => {
+  console.log('이벤트 4');
+});
+myEvent.removeAllListeners('event4');
+myEvent.emit('event4'); // 실행 안 됨
+
+const listener = () => {
+  console.log('이벤트 5');
+};
+myEvent.on('event5', listener);
+myEvent.removeListener('event5', listener);
+myEvent.emit('event5'); // 실행 안 됨
+
+console.log(myEvent.listenerCount('event2')); */
+
+/* setInterval(() => {
+  console.log('시작');
+  try {
+    throw new Error('서버를 고장내주마!');
+  } catch (err) {
+    console.error(err);
+  }
+}, 1000); */
+
+process.on('uncaughtException', (err) => {
+  console.error('예기치 못한 에러', err);
+  // 로그 남김
+  // process.exit(1);
+});
+
+setInterval(() => {
+  throw new Error('서버를 고장내주마!');
+}, 1000);
+
+setTimeout(() => {
+  console.log('실행됩니다');
+}, 2000);

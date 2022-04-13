@@ -62,7 +62,7 @@
           - Delete : 서버 자원 삭제, 쿼리 스트링(Delete)
           - Options : 요청전 통신 옵션 설정
         - 표시 방법
-          - GET / users
+          - GET / users, GET/boards
           - POST /users, PUT / users
           - PATCH /boards/223
           - DELETE /users /23445
@@ -71,4 +71,93 @@
             - 서비스 확장시  서버의 수정 없이 개발 가능
               - 개발시 백엔드, 프론트엔드 협력 용이
               - rest api정의, 상호 교환 정보형태 정의
+              - 서버의 업데이트가 클라이언트에 영향을 거의 주지 않게
           - RESTful: REST API형태로 구현한것
+
+* req : request 객체(readStream)
+  - req.method
+    - 요청 메소드 정보
+  - req.url
+    - url정보
+  - req.session
+  - req.headers.cookie
+    - 쿠키값 정보
+
+* res: response 객체(writeStream)
+  - res.writeHead()
+  - res.write()
+  - res.end()
+
+* JSON객체 ->문자열 : const JSON 객체명 = JSON.stringify(JSON객체명)
+* 문자열 -> JSON객체 : const JSON 객체명 = JSON.parse(문자열명);
+
+## 4.3 쿠키, 세션
+* 요청하는 사람의 정보를 알고 싶어서 사용하는 정보
+  - 로그인 처리
+
+* cookie
+  - 쿠키 작성: 서버
+  - 쿠키 전송:
+    - 브라우저가 서버로 최초 요청시 서버가 만들어서 응답과 함께 전송
+    - 브라우저가 최초요청 이후 매번 서버로 
+                브라우저가 쿠키정보를 요청과 함께 전송
+    - 보안에 취약
+  - 쿠키의 구성
+    - 키1=값1;키2=값2;...
+  - 쿠키에 저장할 수 없는 값: 한글,일본어---> encodeURIComponent()로 처리
+  - 쿠키에는 ASCII코드만 저장가능: 특수문자 제외
+  - 쿠키 작성 : 응답헤더
+    - 서버가 함
+    - res.writedHead(응답코드,{'Set-Cookie':'키1=값1;키2=값2;...'})
+  - 쿠키 사용 : 요청헤더
+    - req.headers.cookie
+
+* session
+  - 쿠키와 함께 사용되고, 세션의 정보는 서버에 저장관리
+  - 세션의 정보를 단순히 서버에 저장하지 않음: Redis, Memcached 등과 같은 DB사용
+  - 세션쿠키: 세션을 위해 사용되는 쿠키
+
+## 4.4 https와 http2
+* https
+  - sequre, http+SSL
+  - 요청과 응답 사이에 암호화 처리
+  - require('https')
+  - https.createServer(인증서관련옵션, 콜백);
+* http2
+  - https+http버전2 사용 
+  - 헤더에 HTTP/2 정보가 있게됨
+  - require('http2')
+  - https.createSequreServer(인증서관련옵션, 콜백)
+
+## 4.5 cluster
+* 멀티프로세싱(fork : 명사는 포크이지만 동사는 나누어서 실행한다는 의미)
+  - 비교: child_process 모듈
+  - 서버 포트번호는 하나인데 여러개의 서버객체가 실행되어 분산처리
+    - 성능 개선: 장점
+  - 프로세스 단점과 동일한 단점: 상호 메모리 공유가 불가
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

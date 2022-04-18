@@ -1,0 +1,25 @@
+{
+  "name": "ch06learn-express",
+  "version": "0.0.1",
+  "description": "익스프레스 배우기",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "keywords": [
+    "express test",
+    "express learn"
+  ],
+  "author": "ySung",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

@@ -1,5 +1,7 @@
 # 2. 노드를 위해 알아야 할 자바스크립트 문법
 
+https://joshua1988.github.io/web-development/javascript/promise-for-beginners/
+
 ## 2.1 ES2015+: ES6+
 ECMAScript 2015년 버전 이후 엄청난 변화
 최신문법 알아야 노드 소스코드 이해 가능

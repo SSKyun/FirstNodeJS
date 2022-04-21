@@ -225,7 +225,7 @@ try{
 
 ### 2.2.1 AJAX Asynchronous Javascript and XML
 * Web 2.0의 시작, Mashup(매시업) -OpenAPI
-* 웹페이지의 이동없이 서버의 욫ㅇ에 대한 응답을 받아 처리할 수 있는 기술
+* 웹페이지의 이동없이 서버의 요청에 대한 응답을 받아 처리할 수 있는 기술
 * XML--> 750N
 * XMLHttpRequest 객체사용하여 통신
   - 관련 대체 라이브러리 많음
